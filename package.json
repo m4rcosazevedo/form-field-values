@@ -1,0 +1,27 @@
+{
+  "name": "mpca-form-field-values",
+  "version": "0.0.2",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && vite build",
+    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
+    "prepublishOnly": "yarn build"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/mpca-form-field-values.umd.js",
+  "module": "./dist/mpca-form-field-values.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/mpca-form-field-values.es.js",
+      "require": "./dist/mpca-form-field-values.umd.js"
+    }
+  }
+}
