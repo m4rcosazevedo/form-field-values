@@ -1,6 +1,17 @@
+# Install
+
+```sh
+  yarn add mpca-form-field-values
+```
+
 # How to use
 
 ```ts
+type User = {
+  email: string
+  password: string
+}
+
 function App() {
   const { values, setFieldValue } = useForm<User>()
 
@@ -9,7 +20,7 @@ function App() {
     setFieldValue(name, value)
   }
 
-  const handleSubmit = () {
+  const handleSubmit = () => {
     console.log(values)
   }
 
@@ -21,8 +32,13 @@ function App() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="password">Email</label>
-        <input type="password" name="password" id="password" onChange={handleChange} />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          onChange={handleChange}
+        />
       </div>
 
       <button onClick={handleSubmit}>Enviar</button>
