@@ -7,16 +7,18 @@ type ContextTypeObject = {
 type ContextType<T extends ContextTypeObject> = {
   values: T
   setFieldValue: (key: string, value: string) => void
+  clear: () => void
 }
 
 const Context = React.createContext<ContextType<ContextTypeObject>|null>(null)
 
-type Props = {
-  children: React.ReactNode
+type Props<T> = {
+  children: React.ReactNode,
+  initialValues?: T
 }
 
-const FormProvider = <T extends ContextTypeObject>({ children }: Props) => {
-  const [values, setValues] = React.useState<T>({} as T)
+export const FormProvider = <T extends ContextTypeObject>({ children, initialValues }: Props<T>) => {
+  const [values, setValues] = React.useState<T>(initialValues as T ?? {})
 
   const setFieldValue = (key: string, value: string) => {
     setValues(prev => ({
@@ -25,8 +27,12 @@ const FormProvider = <T extends ContextTypeObject>({ children }: Props) => {
     }))
   }
 
+  const clear = () => {
+    setValues({} as T)
+  }
+
   return (
-    <Context.Provider value={{ values, setFieldValue }}>
+    <Context.Provider value={{ values, setFieldValue, clear }}>
       {children}
     </Context.Provider>
   )
